@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-// --module-path /Users/praveshshrestha/Documents/JavaFX Library/javafx-sdk-11.0.2/lib --add-modules=javafx-swt,javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web
 public class Main extends Application {
 
     @Override
@@ -20,5 +19,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
