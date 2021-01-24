@@ -19,13 +19,14 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" />
+            <TextField layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
             <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" text="Search" />
             <TableView layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
               <columns>
                   <TableColumn prefWidth="71.0" text="Part ID" />
                   <TableColumn prefWidth="157.0" text="Part Name" />
                   <TableColumn minWidth="8.0" prefWidth="101.0" text="Inventory Count" />
+                 <TableColumn minWidth="8.0" prefWidth="101.0" text="Price/Cost per unit" />
               </columns>
             </TableView>
             <Button layoutX="15.0" layoutY="232.0" mnemonicParsing="false" text="Add" />
@@ -39,13 +40,14 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" />
+            <TextField layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
             <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" text="Search" />
             <TableView layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
                <columns>
                    <TableColumn prefWidth="73.0" text="Product ID" />
                    <TableColumn prefWidth="131.0" text="Product Name" />
                    <TableColumn prefWidth="156.0" text="Inventory Count" />
+                  <TableColumn minWidth="8.0" prefWidth="101.0" text="Price/Cost per unit" />
                </columns>
             </TableView>
             <Button layoutX="15.0" layoutY="232.0" mnemonicParsing="false" text="Add" />

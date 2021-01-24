@@ -15,7 +15,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main_screen.fxml"));
         primaryStage.setTitle("C482 Inventory Management System WGU");
         primaryStage.setScene(new Scene(root, 1020, 400));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
