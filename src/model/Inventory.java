@@ -8,7 +8,7 @@ public class Inventory {
     private ObservableList<Product> allProducts;
 
     public void addPart (Part newPart) {
-
+        allParts.add(newPart); //FIX ME probable need to handle input exceptions
     }
 
     public void addProduct (Product newProduct) {

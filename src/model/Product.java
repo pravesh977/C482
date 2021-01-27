@@ -70,7 +70,7 @@ public class Product {
     }
 
     public void addAssociatedPart (Part part) {
-
+        associatedParts.add(part); //FIX ME probable need to handle input exceptions
     }
 
     public boolean deleteAssociatedPart (Part selectedAssociatedPart) {
