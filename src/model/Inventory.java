@@ -1,6 +1,7 @@
 package model;
 
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableListBase;
 
@@ -8,20 +9,20 @@ import java.util.ArrayList;
 
 public class Inventory {
 
-    private static ObservableList<Part> allParts;
-    private static ObservableList<Product> allProducts;
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     //remove this constructor?
-    public Inventory() {
-        //allParts = new ObservableList<Part>();
-    }
+//    public Inventory() {
+//        allParts = new ObservableList<Part>();
+//    }
 
     public static void addPart (Part newPart) {
         allParts.add(newPart); //FIX ME probable need to handle input exceptions
     }
 
     public static void addProduct (Product newProduct) {
-
+        allProducts.add(newProduct);
     }
 
 //    public static Part lookupPart (int partId) {
@@ -56,11 +57,11 @@ public class Inventory {
 //        return true or false;
 //    }
 //
-//    public static ObservableList<Part> getAllParts () {
-//        return some list
-//    }
+    public static ObservableList<Part> getAllParts () {
+        return allParts;
+    }
 //
-//    public static ObservableList<Product> getAllProducts () {
-//        return some list
-//    }
+    public static ObservableList<Product> getAllProducts () {
+        return allProducts;
+    }
 }

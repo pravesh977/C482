@@ -1,10 +1,11 @@
 package model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product {
 
-    ObservableList<Part> associatedParts;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();;
     private int id;
     private String name;
     private double price;
@@ -78,8 +79,7 @@ public class Product {
     }
 
     //FIX ME : add this part after understanding observable list
-//    public ObservableList<Part> getAllAssociatedParts () {
-//
-//        return some list
-//    }
+    public ObservableList<Part> getAllAssociatedParts () {
+        return associatedParts;
+    }
 }

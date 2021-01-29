@@ -15,6 +15,40 @@ public class Main extends Application {
     public void init() {
 //        Inventory inventory = new Inventory();
 //        addTestData(inventory);
+
+        //adding InHouse parts for test data
+        Part tire = new InHouse(1, "bike tires", 12.99, 10,5,20,1);
+        Part seat = new InHouse(3, "Comfy Seat", 8.50, 12,1,50,3);
+
+        //adding OutSourced parts for test data
+        Part chain = new Outsourced(4,"Sturdy Chain", 30.25, 12,3,20,"BMX Supplies");
+        Part spoke = new Outsourced(5,"metal spoke", 5.10, 10,4,15,"Super Cycles Supplies");
+        Part rim = new Outsourced(6,"Silver Rim", 15.50, 8,1,30,"Fly Bikes Co.");
+
+        //adding test data to Inventory ObservableList
+        Inventory.addPart(tire);
+        Inventory.addPart(new InHouse(2, "Smooth handles", 15.00, 20,10,35,2));
+        Inventory.addPart(seat);
+        Inventory.addPart(chain);
+        Inventory.addPart(spoke);
+        Inventory.addPart(rim);
+
+        //creating Product object and adding some associated parts
+        Product falconBicycle = new Product(1,"Falcon Bicycle", 500.00, 5,1,20);
+        Product schwinnBike = new Product(2,"Schwinn Hybrid", 400.00, 7,5,15);
+        Product roadMaster = new Product(3,"Granite Mountain Bike", 200.00, 20,1,50);
+
+        falconBicycle.addAssociatedPart(tire);
+        falconBicycle.addAssociatedPart(new InHouse(2, "Smooth handles", 15.00, 20,10,35,2));
+        falconBicycle.addAssociatedPart(spoke);
+        falconBicycle.addAssociatedPart(rim);
+        //System.out.println(falconBicycle.getName());
+        //System.out.println(falconBicycle.getAllAssociatedParts().get(1).getName());
+        Inventory.addProduct(falconBicycle);
+        //System.out.println(Inventory.getAllProducts().get(0).getName());
+        Inventory.addProduct(schwinnBike);
+        Inventory.addProduct(roadMaster);
+
     }
 
     @Override
@@ -43,7 +77,7 @@ public class Main extends Application {
     //this executes after the app closes
     @Override
     public void stop() {
-        System.out.println("STOP THIS");
+        //System.out.println("STOP THIS");
     }
 
     public void addTestData(Inventory inv) {
