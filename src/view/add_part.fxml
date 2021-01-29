@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPartController">
    <children>
       <Label layoutX="58.0" layoutY="14.0" text="Add Part">
@@ -12,8 +11,11 @@
             <Font name="Times New Roman Bold" size="16.0" />
          </font>
       </Label>
-      <RadioButton layoutX="178.0" layoutY="15.0" mnemonicParsing="false" text="In-House" />
-      <RadioButton layoutX="363.0" layoutY="15.0" mnemonicParsing="false" text="Outsourced" />
+      <RadioButton layoutX="178.0" layoutY="15.0" mnemonicParsing="false" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="addPartToggleRadio" />
+         </toggleGroup></RadioButton>
+      <RadioButton layoutX="363.0" layoutY="15.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$addPartToggleRadio" />
       <TextField layoutX="161.0" layoutY="76.0" />
       <TextField layoutX="161.0" layoutY="121.0" />
       <TextField layoutX="161.0" layoutY="165.0" />
@@ -29,6 +31,6 @@
       <TextField layoutX="415.0" layoutY="257.0" />
       <Label layoutX="383.0" layoutY="262.0" text="Min" />
       <Button layoutX="366.0" layoutY="351.0" mnemonicParsing="false" text="Save" />
-      <Button layoutX="451.0" layoutY="351.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="451.0" layoutY="351.0" mnemonicParsing="false" onMouseClicked="#cancelPressed" text="Cancel" />
    </children>
 </AnchorPane>

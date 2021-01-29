@@ -1,57 +1,66 @@
 package model;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
+
+import java.util.ArrayList;
 
 public class Inventory {
 
-    private ObservableList<Part> allParts;
-    private ObservableList<Product> allProducts;
+    private static ObservableList<Part> allParts;
+    private static ObservableList<Product> allProducts;
 
-    public void addPart (Part newPart) {
+    //remove this constructor?
+    public Inventory() {
+        //allParts = new ObservableList<Part>();
+    }
+
+    public static void addPart (Part newPart) {
         allParts.add(newPart); //FIX ME probable need to handle input exceptions
     }
 
-    public void addProduct (Product newProduct) {
+    public static void addProduct (Product newProduct) {
 
     }
 
-//    public Part lookupPart (int partId) {
+//    public static Part lookupPart (int partId) {
 //        return somepart
 //    }
 //
-//    public Product lookupProduct (int productId) {
+//    public static Product lookupProduct (int productId) {
 //        return someproduct
 //    }
 //
-//    public ObservableList<Part> lookupPart (String partName) {
+//    public static ObservableList<Part> lookupPart (String partName) {
 //        return list of parts
 //    }
 //
-//    public ObservableList<Product> lookupProduct (String productName) {
+//    public static ObservableList<Product> lookupProduct (String productName) {
 //        return list of products
 //    }
 //
-//    public void updatePart (int index, Part selectedPart) {
+//    public static void updatePart (int index, Part selectedPart) {
 //
 //    }
 //
-//    public void updateProduct (int index, Product newProduct) {
+//    public static void updateProduct (int index, Product newProduct) {
 //
 //    }
 //
-//    public boolean deletePart (Part selectedPart) {
+//    public static boolean deletePart (Part selectedPart) {
 //        return ture or false;
 //    }
 //
-//    public boolean deleteProduct (Product selectedProduct) {
+//    public static boolean deleteProduct (Product selectedProduct) {
 //        return true or false;
 //    }
 //
-//    public ObservableList<Part> getAllParts () {
+//    public static ObservableList<Part> getAllParts () {
 //        return some list
 //    }
 //
-//    public ObservableList<Product> getAllProducts () {
+//    public static ObservableList<Product> getAllProducts () {
 //        return some list
 //    }
 }

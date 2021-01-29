@@ -80,5 +80,5 @@
         </AnchorPane>
     </AnchorPane>
     <Button layoutX="709.0" layoutY="577.0" mnemonicParsing="false" text="Save" />
-    <Button layoutX="786.0" layoutY="577.0" mnemonicParsing="false" text="Cancel" />
+    <Button layoutX="786.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#cancelPressed" text="Cancel" />
 </AnchorPane>

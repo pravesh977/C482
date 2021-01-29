@@ -9,9 +9,18 @@ import model.*;
 
 public class Main extends Application {
 
+
+    //create test data here
+    @Override
+    public void init() {
+//        Inventory inventory = new Inventory();
+//        addTestData(inventory);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         //initializing inventory object and passing it to addTestData
+        //this is done at init method above
 //        Inventory inventory = new Inventory();
 //        addTestData(inventory);
 
@@ -22,12 +31,19 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
+
 //        System.out.println("hello boy");
 //        Product bike = new Product(12, "BMX", 120, 15, 5, 20);
 //        System.out.println(bike.getName());
         launch(args);
+    }
+
+
+    //this executes after the app closes
+    @Override
+    public void stop() {
+        System.out.println("STOP THIS");
     }
 
     public void addTestData(Inventory inv) {
@@ -47,8 +63,8 @@ public class Main extends Application {
 //        inv.addPart(chain);
 //        inv.addPart(spoke);
 //        inv.addPart(rim);
-//
-//        //creating Product object and adding some associated parts
+//        System.out.println(tire.getName());
+        //creating Product object and adding some associated parts
 //        Product falconBicycle = new Product(1,"Falcon Bicycle", 500.00, 5,1,10);
 //        falconBicycle.addAssociatedPart(tire);
 //        falconBicycle.addAssociatedPart(new InHouse(2, "Smooth handles", 15.00, 20,10,35,2));
