@@ -25,17 +25,23 @@ public class Inventory {
         allProducts.add(newProduct);
     }
 
-//    public static Part lookupPart (int partId) {
-//        return somepart
-//    }
+    public static Part lookupPart (int partId) {
+        for(int i = 0; i < allParts.size(); i++) {
+            if(allParts.get(i).getId() == partId) {
+                System.out.println("Match found which is " + partId + " for " + allParts.get(i).getName());
+                return allParts.get(i);
+            }
+        }
+        return allParts.get(0); //Fix me what happens if no part found?
+    }
 //
 //    public static Product lookupProduct (int productId) {
 //        return someproduct
 //    }
 //
-//    public static ObservableList<Part> lookupPart (String partName) {
-//        return list of parts
-//    }
+    public static ObservableList<Part> lookupPart (String partName) {
+        return allParts;
+    }
 //
 //    public static ObservableList<Product> lookupProduct (String productName) {
 //        return list of products

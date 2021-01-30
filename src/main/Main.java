@@ -48,7 +48,6 @@ public class Main extends Application {
         //System.out.println(Inventory.getAllProducts().get(0).getName());
         Inventory.addProduct(schwinnBike);
         Inventory.addProduct(roadMaster);
-
     }
 
     @Override

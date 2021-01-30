@@ -112,7 +112,11 @@ public class MainScreenController {
 
     @FXML
     public void searchPartsAction() {
-        System.out.println(searchPartsField.getText()); //replace this with search
+        System.out.println("searched for " + searchPartsField.getText()); //replace this with search
+        Part searchedPart = Inventory.lookupPart(Integer.parseInt(searchPartsField.getText()));
+        System.out.println(searchedPart.getName() + " and id is " + searchedPart.getId());
+        //Manipulate table here
+        partsTableView.getSelectionModel().select(searchedPart.getId());
     }
 
     @FXML
