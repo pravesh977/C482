@@ -57,6 +57,9 @@ public class MainScreenController {
     @FXML
     private TextField searchPartsField;
 
+    @FXML
+    private TextField searchProductsField;
+
     /**
      * Exception in Application start method
      * Corrected by matching the main_scree.fxml file's TableView id with field declaration in MainScreenController class
@@ -86,8 +89,13 @@ public class MainScreenController {
         stage.show();
     }
 
+
     @FXML
     public void modifyPart(MouseEvent event) throws IOException {
+        //System.out.println(partsTableView.getSelectionModel().getSelectedItem().getName());
+        String modifyPartName = partsTableView.getSelectionModel().getSelectedItem().getName();
+        ModifyPartController controller = new ModifyPartController();
+        controller.handleModifyPartsSave();
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
         stage.setScene(new Scene(scene));
@@ -110,20 +118,37 @@ public class MainScreenController {
         stage.show();
     }
 
-    //NumberFormatException: fixed by using catch to see if its string
+    //NumberFormatException.For input string: fixed by using catch to see if its string
     @FXML
     public void searchPartsAction() {
         //Part select searched working
         try {
-            Part searchedPart = Inventory.lookupPart(Integer.parseInt(searchPartsField.getText()));
+            int searchedPartInteger = Integer.parseInt(searchPartsField.getText());
+            Part searchedPart = Inventory.lookupPart(searchedPartInteger);
             partsTableView.getSelectionModel().select(searchedPart);
             partsTableView.scrollTo(searchedPart);
+            searchPartsField.clear();
         }
         catch(NumberFormatException e) {
-            String queryField = searchPartsField.getText();
-            ObservableList<Part> matched = Inventory.lookupPart(queryField);
-            partsTableView.setItems(matched);
+            String searchedPartsString = searchPartsField.getText();
+            ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
+            partsTableView.setItems(matchedPartsList);
             searchPartsField.clear();
+        }
+    }
+
+    public void searchProductsAction() {
+        try {
+            int searchedProductInteger = Integer.parseInt(searchProductsField.getText());
+            Product searchedProduct = Inventory.lookupProduct(searchedProductInteger);
+            productsTableView.getSelectionModel().select(searchedProduct);
+            productsTableView.scrollTo(searchedProduct);
+            searchProductsField.clear();
+        } catch(NumberFormatException e) {
+            String searchedProductString = searchProductsField.getText();
+            ObservableList<Product> matchedProductsList = Inventory.lookupProduct(searchedProductString);
+            productsTableView.setItems(matchedProductsList);
+            searchProductsField.clear();
         }
     }
 

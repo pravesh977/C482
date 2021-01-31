@@ -40,8 +40,8 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
-            <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" text="Search" />
+            <TextField fx:id="searchProductsField" layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
+            <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#searchProductsAction" text="Search" />
             <TableView fx:id="productsTableView" layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
                <columns>
                   <TableColumn fx:id="productIdCol" prefWidth="73.0" text="Product ID" />

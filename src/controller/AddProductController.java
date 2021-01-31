@@ -49,6 +49,7 @@ public class AddProductController {
     @FXML
     private TableColumn<Part, Double> associatedPartPriceCol;
 
+
     public void initialize() {
         //adding data to total parts table
         addPartsView.setItems(Inventory.getAllParts());
@@ -59,6 +60,10 @@ public class AddProductController {
 
         //adding parts to associated parts table
         //associatedPartsView.setItems();
+    }
+
+    public void handleSearchPartsClicked() {
+
     }
 
     @FXML

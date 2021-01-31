@@ -45,25 +45,36 @@ public class Inventory {
         }
         return null;
     }
-//
-//    public static Product lookupProduct (int productId) {
-//        return someproduct
-//    }
-//
+
+    public static Product lookupProduct (int productId) {
+        for(Product element : allProducts) {
+            if(element.getId() == productId) {
+                return element;
+            }
+        }
+        return null;
+    }
+
     public static ObservableList<Part> lookupPart (String partName) {
         ObservableList<Part> matchedParts = FXCollections.observableArrayList();
         for(Part element : allParts) {
-            if (element.getName().contains(partName)) {
+            if (element.getName().toLowerCase().contains(partName.toLowerCase())) {
                 matchedParts.add(element);
             }
         }
         return matchedParts;
     }
-//
-//    public static ObservableList<Product> lookupProduct (String productName) {
-//        return list of products
-//    }
-//
+
+    public static ObservableList<Product> lookupProduct (String productName) {
+        ObservableList<Product> matchedProducts = FXCollections.observableArrayList();
+        for(Product element : allProducts) {
+            if (element.getName().toLowerCase().contains(productName)){
+                matchedProducts.add(element);
+            }
+        }
+        return matchedProducts;
+    }
+
 //    public static void updatePart (int index, Part selectedPart) {
 //
 //    }
