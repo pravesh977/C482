@@ -18,6 +18,7 @@ public class AddPartController {
 
     Stage stage;
     Parent scene;
+    private int idCount;
 
     @FXML
     private ToggleGroup addPartToggleRadio;
@@ -52,6 +53,13 @@ public class AddPartController {
     @FXML
     private Label machineIdOrCompanyLabel;
 
+    public void initialize() {
+        //Fix me disable button and set id here
+        //int sizeOfParts = Inventory.getAllParts().size();
+        //newPartIdTextField.setText(String.valueOf(sizeOfParts + 1));
+        //newPartIdTextField.setText(String.valueOf(idCount));
+    }
+
     @FXML
     public void saveNewPart(MouseEvent event) throws IOException {
         int id = Integer.parseInt(newPartIdTextField.getText());
@@ -75,6 +83,7 @@ public class AddPartController {
             Inventory.addPart(newPart);
             System.out.println("it was created in company name");
         }
+        idCount++;
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         stage.setScene(new Scene(scene));

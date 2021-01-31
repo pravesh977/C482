@@ -110,13 +110,21 @@ public class MainScreenController {
         stage.show();
     }
 
+    //NumberFormatException: fixed by using catch to see if its string
     @FXML
     public void searchPartsAction() {
-        System.out.println("searched for " + searchPartsField.getText()); //replace this with search
-        Part searchedPart = Inventory.lookupPart(Integer.parseInt(searchPartsField.getText()));
-        System.out.println(searchedPart.getName() + " and id is " + searchedPart.getId());
-        //Manipulate table here
-        partsTableView.getSelectionModel().select(searchedPart.getId());
+        //Part select searched working
+        try {
+            Part searchedPart = Inventory.lookupPart(Integer.parseInt(searchPartsField.getText()));
+            partsTableView.getSelectionModel().select(searchedPart);
+            partsTableView.scrollTo(searchedPart);
+        }
+        catch(NumberFormatException e) {
+            String queryField = searchPartsField.getText();
+            ObservableList<Part> matched = Inventory.lookupPart(queryField);
+            partsTableView.setItems(matched);
+            searchPartsField.clear();
+        }
     }
 
     @FXML

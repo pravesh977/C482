@@ -26,13 +26,24 @@ public class Inventory {
     }
 
     public static Part lookupPart (int partId) {
-        for(int i = 0; i < allParts.size(); i++) {
-            if(allParts.get(i).getId() == partId) {
-                System.out.println("Match found which is " + partId + " for " + allParts.get(i).getName());
-                return allParts.get(i);
+        //using for loop
+//        for(int i = 0; i < allParts.size(); i++) {
+//            if(allParts.get(i).getId() == partId) {
+//                System.out.println("Match found which is " + partId + " for " + allParts.get(i).getName());
+//                return allParts.get(i);
+//            }
+//
+//        }
+//        return null;
+
+        //using Enhanced loop
+        for(Part element : allParts)
+        {
+            if(element.getId() == partId) {
+                return element;
             }
         }
-        return allParts.get(0); //Fix me what happens if no part found?
+        return null;
     }
 //
 //    public static Product lookupProduct (int productId) {
@@ -40,7 +51,13 @@ public class Inventory {
 //    }
 //
     public static ObservableList<Part> lookupPart (String partName) {
-        return allParts;
+        ObservableList<Part> matchedParts = FXCollections.observableArrayList();
+        for(Part element : allParts) {
+            if (element.getName().contains(partName)) {
+                matchedParts.add(element);
+            }
+        }
+        return matchedParts;
     }
 //
 //    public static ObservableList<Product> lookupProduct (String productName) {
