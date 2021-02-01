@@ -68,7 +68,7 @@
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Label>
-            <Button layoutX="302.0" layoutY="-13.0" mnemonicParsing="false" onMouseClicked="#handleSearchPartsClicked" text="Search" />
+            <Button layoutX="302.0" layoutY="-13.0" mnemonicParsing="false" text="Search" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="390.0" layoutY="303.0" prefHeight="234.0" prefWidth="474.0">

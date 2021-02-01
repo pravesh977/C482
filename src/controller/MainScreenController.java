@@ -92,12 +92,24 @@ public class MainScreenController {
 
     @FXML
     public void modifyPart(MouseEvent event) throws IOException {
+
+        //trying to extantiate controller
         //System.out.println(partsTableView.getSelectionModel().getSelectedItem().getName());
-        String modifyPartName = partsTableView.getSelectionModel().getSelectedItem().getName();
-        ModifyPartController controller = new ModifyPartController();
-        controller.handleModifyPartsSave();
+//        String modifyPartName = partsTableView.getSelectionModel().getSelectedItem().getName();
+//        ModifyPartController controller = new ModifyPartController();
+//        controller.handleModifyPartsSave();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/modify_part.fxml"));
+        loader.load();
+
+        ModifyPartController modPartCont = loader.getController();
+
+        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+        modPartCont.passPartsToModify(selectedPart);
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
+        //scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
     }
@@ -109,6 +121,7 @@ public class MainScreenController {
         stage.setScene(new Scene(scene));
         stage.show();
     }
+
 
     @FXML
     public void modifyProduct(MouseEvent event) throws IOException {

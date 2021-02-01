@@ -73,11 +73,13 @@ public class AddPartController {
 
         //insert condition for radio buttons
         if(inHouseRadioButton.isSelected()) {
+            machineIdOrCompanyLabel.setText("Machine Id");
             int machineId = Integer.parseInt(newPartMachineIdOrCompanyNameTextField.getText());
             Part newPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
             Inventory.addPart(newPart);
             System.out.println("it was created in machine");
         } else if(outsourcedRadioButton.isSelected()) {
+            machineIdOrCompanyLabel.setText("Company Name");
             String companyName = newPartMachineIdOrCompanyNameTextField.getText();
             Part newPart = new Outsourced(id, name,price, totalInventory, min, max, companyName);
             Inventory.addPart(newPart);
