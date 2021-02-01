@@ -21,7 +21,7 @@
         <TextField fx:id="modifyInvTextField" layoutX="161.0" layoutY="165.0" />
         <TextField fx:id="modifyPriceTextField" layoutX="161.0" layoutY="209.0" />
         <TextField fx:id="modifyMaxTextField" layoutX="161.0" layoutY="257.0" />
-        <TextField fx:id="modifyMachineOrCompanyTextField" layoutX="161.0" layoutY="306.0" />
+        <TextField fx:id="modifyMachineOrCompanyTextField" layoutX="172.0" layoutY="306.0" prefHeight="27.0" prefWidth="150.0" />
         <Label layoutX="75.0" layoutY="81.0" text="ID" />
         <Label fx:id="nameLabel" layoutX="75.0" layoutY="135.0" text="Name" />
         <Label layoutX="75.0" layoutY="179.0" text="Inv" />

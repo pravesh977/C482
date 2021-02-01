@@ -53,43 +53,57 @@ public class AddPartController {
     @FXML
     private Label machineIdOrCompanyLabel;
 
-    public void initialize() {
-        //Fix me disable button and set id here
-        //int sizeOfParts = Inventory.getAllParts().size();
-        //newPartIdTextField.setText(String.valueOf(sizeOfParts + 1));
-        //newPartIdTextField.setText(String.valueOf(idCount));
-    }
 
+    /**RUNTIME ERROR: NumberFormatException.
+
+     Fixed by using try catch block to catch format errors in the user input field*/
     @FXML
     public void saveNewPart(MouseEvent event) throws IOException {
-        int id = Integer.parseInt(newPartIdTextField.getText());
-        String name = newPartNameTextField.getText();
-        double price = Double.parseDouble(newPartPriceTextField.getText());
-        //we can also use valueOf like so
-        //int invNum = Integer.valueOf(newPartInvTextField.getText());
-        int totalInventory = Integer.parseInt(newPartInvTextField.getText());
-        int min = Integer.parseInt(newPartMinTextField.getText());
-        int max = Integer.parseInt(newPartMaxTextField.getText());
+    //   Min should be less than Max; and Inv should be between those two values.
+        try {
+            int id = Integer.parseInt(newPartIdTextField.getText());
+            String name = newPartNameTextField.getText();
+            double price = Double.parseDouble(newPartPriceTextField.getText());
+            //we can also use valueOf like so
+            //int invNum = Integer.valueOf(newPartInvTextField.getText());
+            int totalInventory = Integer.parseInt(newPartInvTextField.getText());
+            int min = Integer.parseInt(newPartMinTextField.getText());
+            int max = Integer.parseInt(newPartMaxTextField.getText());
+            if(min >=  max) {
+                AlertMessageController.minMaxError();
+            }
+            else if((totalInventory < min) || (totalInventory > max)) {
+                AlertMessageController.inventoryInBetween();
+            }
+            else {
 
-        //insert condition for radio buttons
-        if(inHouseRadioButton.isSelected()) {
-            machineIdOrCompanyLabel.setText("Machine Id");
-            int machineId = Integer.parseInt(newPartMachineIdOrCompanyNameTextField.getText());
-            Part newPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
-            Inventory.addPart(newPart);
-            System.out.println("it was created in machine");
-        } else if(outsourcedRadioButton.isSelected()) {
-            machineIdOrCompanyLabel.setText("Company Name");
-            String companyName = newPartMachineIdOrCompanyNameTextField.getText();
-            Part newPart = new Outsourced(id, name,price, totalInventory, min, max, companyName);
-            Inventory.addPart(newPart);
-            System.out.println("it was created in company name");
+                //insert condition for radio buttons
+                if (inHouseRadioButton.isSelected()) {
+                    machineIdOrCompanyLabel.setText("Machine Id");
+                    int machineId = Integer.parseInt(newPartMachineIdOrCompanyNameTextField.getText());
+                    Part newPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
+                    Inventory.addPart(newPart);
+                    System.out.println("it was created in machine");
+                } else if (outsourcedRadioButton.isSelected()) {
+                    machineIdOrCompanyLabel.setText("Company Name");
+                    String companyName = newPartMachineIdOrCompanyNameTextField.getText();
+                    Part newPart = new Outsourced(id, name, price, totalInventory, min, max, companyName);
+                    Inventory.addPart(newPart);
+                    System.out.println("it was created in company name");
+                }
+
+                idCount++;
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+            }
+
+        } catch(NumberFormatException exp) {
+            //System.out.println(exp);
+            AlertMessageController.errorPart();
         }
-        idCount++;
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     @FXML

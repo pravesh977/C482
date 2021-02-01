@@ -7,15 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.*;
 
+import javax.security.sasl.SaslException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -89,29 +87,53 @@ public class MainScreenController {
         stage.show();
     }
 
-
+    /**RUNTIME ERROR NullPointerException: caused by clicking on modify button without selecting item. try block.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void modifyPart(MouseEvent event) throws IOException {
 
-        //trying to extantiate controller
+        //trying to extantiate controller, cant do it this way
         //System.out.println(partsTableView.getSelectionModel().getSelectedItem().getName());
 //        String modifyPartName = partsTableView.getSelectionModel().getSelectedItem().getName();
 //        ModifyPartController controller = new ModifyPartController();
 //        controller.handleModifyPartsSave();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../view/modify_part.fxml"));
-        loader.load();
+        try {
 
-        ModifyPartController modPartCont = loader.getController();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/modify_part.fxml"));
+            loader.load();
 
-        Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
-        modPartCont.passPartsToModify(selectedPart);
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        //scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
+            ModifyPartController modPartCont = loader.getController();
+            Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
+            modPartCont.passPartsToModify(selectedPart);
+            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            //scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch(NullPointerException e) {
+//            Displaying errors in console
+//            System.out.println("something happened");
+//            System.out.println("Exception is " + e);
+//            System.out.println("Exception message " + e.getMessage());
+//            System.out.println("Exception case is " + e.getCause());
+
+            //Displaying errors in an alert window
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("Error selection");
+//            alert.setContentText(e.getMessage());
+//            System.out.println("Exception message " + e);
+//            alert.showAndWait();
+
+//            Displaying error using AlertMessageController class
+                    AlertMessageController.errorNonSelection();
+        }
+
     }
 
     @FXML

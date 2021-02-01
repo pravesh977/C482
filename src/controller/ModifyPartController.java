@@ -53,11 +53,6 @@ public class ModifyPartController {
     @FXML
     private TextField modifyMachineOrCompanyTextField;
 
-
-    public void initialize() {
-        //modifyNameTextField.setText("tits");
-        //nameLabel.setText("bush");
-    }
     @FXML
     public void passPartsToModify(Part modifyPart) {
         modifyIdTextField.setText(String.valueOf(modifyPart.getId()));
@@ -69,13 +64,17 @@ public class ModifyPartController {
         //checking to see what type of object it is using instance of operator(whether inhouse or outsourced)
         if(modifyPart instanceof InHouse) {
             System.out.println("its inhouse");
-            machineCompanyLabel.setText("Machine Id");
+            inHouseRadio.fire();
+            //machineCompanyLabel.setText("Machine Id"); replaced with existing method
+            changeLabelToInhouse();
             InHouse inHousePart = (InHouse)(modifyPart);
             modifyMachineOrCompanyTextField.setText(String.valueOf(inHousePart.getMachineId()));
 
         } else if (modifyPart instanceof Outsourced) {
             System.out.println("its outsourced");
-            machineCompanyLabel.setText("Company Name");
+            outsourcedRadio.fire();
+            //machineCompanyLabel.setText("Company Name");
+            changeLabelToOutsourced();
             Outsourced outSourcedPart = (Outsourced)(modifyPart);
             modifyMachineOrCompanyTextField.setText(outSourcedPart.getCompanyName());
         }
@@ -97,12 +96,4 @@ public class ModifyPartController {
         machineCompanyLabel.setText("Company Name");
     }
 
-//    public void changeRadioAutomatic() {
-//        if(inHouseRadio.isSelected()) {
-//            machineCompanyLabel.setText("Machine Id");
-//        }
-//        else if(outsourcedRadio.isSelected()) {
-//            machineCompanyLabel.setText("Company Name");
-//        }
-//    }
 }
