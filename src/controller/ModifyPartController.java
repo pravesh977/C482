@@ -64,6 +64,7 @@ public class ModifyPartController {
         //checking to see what type of object it is using instance of operator(whether inhouse or outsourced)
         if(modifyPart instanceof InHouse) {
             System.out.println("its inhouse");
+            //this sets the radio button to inhouse
             inHouseRadio.fire();
             //machineCompanyLabel.setText("Machine Id"); replaced with existing method
             changeLabelToInhouse();
@@ -72,6 +73,7 @@ public class ModifyPartController {
 
         } else if (modifyPart instanceof Outsourced) {
             System.out.println("its outsourced");
+            //this sets the radio button to outsourced
             outsourcedRadio.fire();
             //machineCompanyLabel.setText("Company Name");
             changeLabelToOutsourced();

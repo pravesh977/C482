@@ -16,7 +16,7 @@
             <ToggleGroup fx:id="modifyPartToggleRadio" />
          </toggleGroup></RadioButton>
         <RadioButton fx:id="outsourcedRadio" layoutX="363.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#changeLabelToOutsourced" text="Outsourced" toggleGroup="$modifyPartToggleRadio" />
-        <TextField fx:id="modifyIdTextField" layoutX="161.0" layoutY="76.0" />
+        <TextField fx:id="modifyIdTextField" disable="true" layoutX="161.0" layoutY="76.0" />
         <TextField fx:id="modifyNameTextField" layoutX="161.0" layoutY="121.0" />
         <TextField fx:id="modifyInvTextField" layoutX="161.0" layoutY="165.0" />
         <TextField fx:id="modifyPriceTextField" layoutX="161.0" layoutY="209.0" />

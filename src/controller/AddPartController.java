@@ -18,7 +18,6 @@ public class AddPartController {
 
     Stage stage;
     Parent scene;
-    private int idCount;
 
     @FXML
     private ToggleGroup addPartToggleRadio;
@@ -61,7 +60,7 @@ public class AddPartController {
     public void saveNewPart(MouseEvent event) throws IOException {
     //   Min should be less than Max; and Inv should be between those two values.
         try {
-            int id = Integer.parseInt(newPartIdTextField.getText());
+            int id = Inventory.getUniqueIdPart();
             String name = newPartNameTextField.getText();
             double price = Double.parseDouble(newPartPriceTextField.getText());
             //we can also use valueOf like so
@@ -76,7 +75,7 @@ public class AddPartController {
                 AlertMessageController.inventoryInBetween();
             }
             else {
-
+                Inventory.incrementUniqueIdPart();
                 //insert condition for radio buttons
                 if (inHouseRadioButton.isSelected()) {
                     machineIdOrCompanyLabel.setText("Machine Id");
@@ -91,8 +90,6 @@ public class AddPartController {
                     Inventory.addPart(newPart);
                     System.out.println("it was created in company name");
                 }
-
-                idCount++;
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
                 stage.setScene(new Scene(scene));

@@ -17,7 +17,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="outsourcedRadioButton" layoutX="363.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#handleOutsourcedButton" text="Outsourced" toggleGroup="$addPartToggleRadio" />
-      <TextField fx:id="newPartIdTextField" layoutX="161.0" layoutY="76.0" />
+      <TextField fx:id="newPartIdTextField" disable="true" layoutX="161.0" layoutY="76.0" text="Auto Generated Id" />
       <TextField fx:id="newPartNameTextField" layoutX="161.0" layoutY="121.0" />
       <TextField fx:id="newPartInvTextField" layoutX="161.0" layoutY="165.0" />
       <TextField fx:id="newPartPriceTextField" layoutX="161.0" layoutY="209.0" />

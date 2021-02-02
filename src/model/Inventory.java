@@ -8,7 +8,7 @@ import javafx.collections.ObservableListBase;
 import java.util.ArrayList;
 
 public class Inventory {
-
+    private static int uniqueIdPart = 7;
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
@@ -16,6 +16,17 @@ public class Inventory {
 //    public Inventory() {
 //        allParts = new ObservableList<Part>();
 //    }
+    public static int getUniqueIdPart() {
+        return uniqueIdPart;
+    }
+
+    public static void setUniqueIdPart(int uniqueIdPart) {
+        Inventory.uniqueIdPart = uniqueIdPart;
+    }
+
+    public static void incrementUniqueIdPart() {
+        ++uniqueIdPart;
+    }
 
     public static void addPart (Part newPart) {
         allParts.add(newPart); //FIX ME probable need to handle input exceptions
