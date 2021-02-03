@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +48,7 @@ public class AddProductController {
     private TableView<Part> addPartsTableView;
 
     @FXML
-    private TableView<Part> associatedPartsView;
+    private TableView<Part> associatedPartsTableView;
 
     @FXML
     private TableColumn<Part, Integer> partIdCol;
@@ -76,6 +77,9 @@ public class AddProductController {
     @FXML
     private Button saveProductButton;
 
+    ObservableList<Part> initialAssociatedParts = FXCollections.observableArrayList();
+
+
     public void initialize() {
         //adding data to total parts table
         addPartsTableView.setItems(Inventory.getAllParts());
@@ -85,7 +89,11 @@ public class AddProductController {
         partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         //adding parts to associated parts table
-        //associatedPartsView.setItems();
+        associatedPartsTableView.setItems(initialAssociatedParts);
+        associatedPartIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        associatedPartNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        associatedPartInvCountCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        associatedPartPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     /**NumberFormatException when entering string on searchbar
@@ -105,6 +113,22 @@ public class AddProductController {
             addPartsTableView.setItems(matchedPartsList);
             searchPartsTextField.clear();
         }
+    }
+
+    @FXML
+    public void addPartsToAssociatedTable(MouseEvent event) {
+        //select the highlighted part object
+        Part selectedPart = addPartsTableView.getSelectionModel().getSelectedItem();
+        //pass the selected part object to the new initialized part array
+        initialAssociatedParts.add(selectedPart);
+    }
+
+    @FXML
+    public void removeAssociatedPartFromTable() {
+        //select the highlighted part object
+        Part selectedPart = associatedPartsTableView.getSelectionModel().getSelectedItem();
+        //pass the selected part object to the new initialized part array
+        initialAssociatedParts.remove(selectedPart);
     }
 
     /**NumberFormatException
@@ -130,6 +154,13 @@ public class AddProductController {
                 Product newProduct = new Product(id, name, price, totalInventory, min, max);
                 Inventory.addProduct(newProduct);
                 Inventory.incrementUniqueIdProduct();
+
+                //start a loop and get every item from initialAssociatedParts and add to the
+                //associated part of the array
+                for(Part element : initialAssociatedParts) {
+                    newProduct.addAssociatedPart(element);
+                }
+
                 //return to main screen after adding product
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));

@@ -165,6 +165,13 @@ public class MainScreenController {
 
     @FXML
     public void modifyProduct(MouseEvent event) throws IOException {
+
+//        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(0).getName());
+//        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(1).getName());
+
+
+
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/modify_product.fxml"));
         stage.setScene(new Scene(scene));
