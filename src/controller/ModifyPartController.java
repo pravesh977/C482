@@ -62,13 +62,13 @@ public class ModifyPartController {
         modifyMaxTextField.setText(String.valueOf(modifyPart.getMax()));
         modifyMinTextField.setText(String.valueOf(modifyPart.getMin()));
         //checking to see what type of object it is using instance of operator(whether inhouse or outsourced)
-        if(modifyPart instanceof InHouse) {
+        if (modifyPart instanceof InHouse) {
             System.out.println("its inhouse");
             //this sets the radio button to inhouse
             inHouseRadio.fire();
             //machineCompanyLabel.setText("Machine Id"); replaced with existing method
             changeLabelToInHouse();
-            InHouse inHousePart = (InHouse)(modifyPart);
+            InHouse inHousePart = (InHouse) (modifyPart);
             modifyMachineOrCompanyTextField.setText(String.valueOf(inHousePart.getMachineId()));
 
         } else if (modifyPart instanceof Outsourced) {
@@ -77,12 +77,13 @@ public class ModifyPartController {
             outsourcedRadio.fire();
             //machineCompanyLabel.setText("Company Name");
             changeLabelToOutsourced();
-            Outsourced outSourcedPart = (Outsourced)(modifyPart);
+            Outsourced outSourcedPart = (Outsourced) (modifyPart);
             modifyMachineOrCompanyTextField.setText(outSourcedPart.getCompanyName());
         }
     }
 
-    /**Caused by: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+    /**
+     * Caused by: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
      */
     @FXML
     public void modifyPartsSave(MouseEvent event) throws IOException {
@@ -124,14 +125,14 @@ public class ModifyPartController {
                 stage.show();
             }
 
-        } catch(NumberFormatException exp) { // | IndexOutOfBoundsException exp) {
+        } catch (NumberFormatException exp) { // | IndexOutOfBoundsException exp) {
             AlertMessageController.errorPart();
         }
     }
 
     @FXML
     public void cancelPressed(MouseEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
@@ -147,12 +148,12 @@ public class ModifyPartController {
 
     @FXML
     public void modifyPartConfirmation(int id, Part modifiedPart) {
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Modify Alert");
-            confirmAlert.setContentText("Are you sure you want to modify it?");
-            Optional<ButtonType> result = confirmAlert.showAndWait();
-            if(result.isPresent() && result.get() == ButtonType.OK) {
-                Inventory.updatePart(id, modifiedPart);
-            }
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Modify Alert");
+        confirmAlert.setContentText("Are you sure you want to modify it?");
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Inventory.updatePart(id, modifiedPart);
+        }
     }
 }

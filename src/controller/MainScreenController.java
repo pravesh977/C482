@@ -82,13 +82,14 @@ public class MainScreenController {
 
     @FXML
     public void addNewPart(MouseEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/add_part.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
-    /**RUNTIME ERROR NullPointerException: caused by clicking on modify button without selecting item. try block.
+    /**
+     * RUNTIME ERROR NullPointerException: caused by clicking on modify button without selecting item. try block.
      *
      * @param event
      * @throws IOException
@@ -111,13 +112,12 @@ public class MainScreenController {
             ModifyPartController modPartCont = loader.getController();
             Part selectedPart = partsTableView.getSelectionModel().getSelectedItem();
             modPartCont.passPartsToModify(selectedPart);
-            stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             //scene = FXMLLoader.load(getClass().getResource("../view/modify_part.fxml"));
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
             stage.show();
-        }
-        catch(NullPointerException e) {
+        } catch (NullPointerException e) {
 //            Displaying errors in console
 //            System.out.println("something happened");
 //            System.out.println("Exception is " + e);
@@ -138,7 +138,7 @@ public class MainScreenController {
 
     @FXML
     public void deleteParts() {
-        if(partsTableView.getSelectionModel().getSelectedItem() != null) {
+        if (partsTableView.getSelectionModel().getSelectedItem() != null) {
             Part partForDeletion = partsTableView.getSelectionModel().getSelectedItem();
 //        int selectedIndex = partsTableView.getSelectionModel().getSelectedItem().getId();
 //        Inventory.lookupPart(selectedIndex);
@@ -146,18 +146,17 @@ public class MainScreenController {
             confirmAlert.setTitle("Deletion Alert");
             confirmAlert.setContentText("Are you sure you want to delete it?");
             Optional<ButtonType> result = confirmAlert.showAndWait();
-            if(result.isPresent() && result.get() == ButtonType.OK) {
+            if (result.isPresent() && result.get() == ButtonType.OK) {
                 Inventory.deletePart(partForDeletion);
             }
-        }
-        else {
+        } else {
             AlertMessageController.errorNonSelection();
         }
     }
 
     @FXML
     public void addNewProduct(MouseEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/add_product.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
@@ -166,7 +165,7 @@ public class MainScreenController {
 
     @FXML
     public void modifyProduct(MouseEvent event) throws IOException {
-        stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/modify_product.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
@@ -182,8 +181,7 @@ public class MainScreenController {
             partsTableView.getSelectionModel().select(searchedPart);
             partsTableView.scrollTo(searchedPart);
             searchPartsField.clear();
-        }
-        catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             String searchedPartsString = searchPartsField.getText();
             ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
             partsTableView.setItems(matchedPartsList);
@@ -198,7 +196,7 @@ public class MainScreenController {
             productsTableView.getSelectionModel().select(searchedProduct);
             productsTableView.scrollTo(searchedProduct);
             searchProductsField.clear();
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             String searchedProductString = searchProductsField.getText();
             ObservableList<Product> matchedProductsList = Inventory.lookupProduct(searchedProductString);
             productsTableView.setItems(matchedProductsList);

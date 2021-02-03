@@ -38,22 +38,22 @@
                         <Font name="Times New Roman" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="67.0" layoutY="18.0" />
-                <TextField layoutX="67.0" layoutY="55.0" />
-                <TextField layoutX="67.0" layoutY="94.0" prefHeight="27.0" prefWidth="72.0" />
-                <TextField layoutX="67.0" layoutY="132.0" prefHeight="27.0" prefWidth="72.0" />
-                <TextField layoutX="67.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="idTextField" disable="true" layoutX="67.0" layoutY="18.0" promptText="Auto Generated Id" />
+                <TextField fx:id="nameTextField" layoutX="67.0" layoutY="55.0" />
+                <TextField fx:id="invTextField" layoutX="67.0" layoutY="94.0" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="priceTextField" layoutX="67.0" layoutY="132.0" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="maxTextField" layoutX="67.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
                 <Label layoutX="157.0" layoutY="179.0" text="Min">
                     <font>
                         <Font name="Times New Roman" size="14.0" />
                     </font>
                 </Label>
-                <TextField layoutX="192.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="minTextField" layoutX="192.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="376.0" layoutY="44.0" prefHeight="259.0" prefWidth="474.0">
             <children>
-                <TableView fx:id="addPartsView" layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
+                <TableView fx:id="addPartsTableView" layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
                     <columns>
                         <TableColumn fx:id="partIdCol" prefWidth="73.0" text="Part ID" />
                         <TableColumn fx:id="partNameCol" prefWidth="131.0" text="Part Name" />
@@ -90,6 +90,6 @@
         </AnchorPane>
         <TextField fx:id="searchPartsTextField" layoutX="539.0" layoutY="31.0" prefHeight="27.0" prefWidth="161.0" promptText="Search by Part ID or Name" />
     </AnchorPane>
-    <Button layoutX="709.0" layoutY="577.0" mnemonicParsing="false" text="Save" />
+    <Button fx:id="saveProductButton" layoutX="709.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#saveNewProduct" text="Save" />
     <Button layoutX="786.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#cancelPressed" text="Cancel" />
 </AnchorPane>

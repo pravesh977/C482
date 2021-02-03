@@ -75,7 +75,6 @@ public class AddPartController {
                 AlertMessageController.inventoryInBetween();
             }
             else {
-                Inventory.incrementUniqueIdPart();
                 //insert condition for radio buttons
                 if (inHouseRadioButton.isSelected()) {
                     machineIdOrCompanyLabel.setText("Machine Id");
@@ -90,6 +89,7 @@ public class AddPartController {
                     Inventory.addPart(newPart);
                     System.out.println("it was created in company name");
                 }
+                Inventory.incrementUniqueIdPart();
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
                 stage.setScene(new Scene(scene));

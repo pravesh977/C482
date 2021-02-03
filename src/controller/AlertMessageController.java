@@ -15,7 +15,10 @@ public class AlertMessageController {
     }
 
     public static void errorProduct() {
-
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Error Adding Product");
+        errorAlert.setContentText("Please make sure fields are not empty and formatted correctly");
+        errorAlert.showAndWait();
     }
 
     public static void errorNonSelection() {

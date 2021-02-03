@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Inventory {
     private static int uniqueIdPart = 7;
+    private static int uniqueIdProduct = 4;
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
@@ -20,12 +21,15 @@ public class Inventory {
         return uniqueIdPart;
     }
 
-    public static void setUniqueIdPart(int uniqueIdPart) {
-        Inventory.uniqueIdPart = uniqueIdPart;
-    }
-
     public static void incrementUniqueIdPart() {
         ++uniqueIdPart;
+    }
+    public static int getUniqueIdProduct() {
+        return uniqueIdProduct;
+    }
+
+    public static void incrementUniqueIdProduct() {
+        ++uniqueIdProduct;
     }
 
     public static void addPart (Part newPart) {

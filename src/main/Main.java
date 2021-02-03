@@ -48,6 +48,13 @@ public class Main extends Application {
         //System.out.println(Inventory.getAllProducts().get(0).getName());
         Inventory.addProduct(schwinnBike);
         Inventory.addProduct(roadMaster);
+
+        //adding associated parts to falcon bike product
+        falconBicycle.addAssociatedPart(tire);
+        falconBicycle.addAssociatedPart(new InHouse(2, "Smooth handles", 15.00, 20,10,35,2));
+        falconBicycle.addAssociatedPart(spoke);
+        falconBicycle.addAssociatedPart(rim);
+        //System.out.println(falconBicycle.getAllAssociatedParts().get(2).getName());
     }
 
     @Override
