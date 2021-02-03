@@ -132,20 +132,19 @@ public class MainScreenController {
 //            alert.showAndWait();
 
 //            Displaying error using AlertMessageController class
-                    AlertMessageController.errorNonSelection();
+            AlertMessageController.errorNonSelection();
         }
-
     }
 
     @FXML
-    public void deleteParts() throws IOException {
+    public void deleteParts() {
         if(partsTableView.getSelectionModel().getSelectedItem() != null) {
             Part partForDeletion = partsTableView.getSelectionModel().getSelectedItem();
 //        int selectedIndex = partsTableView.getSelectionModel().getSelectedItem().getId();
 //        Inventory.lookupPart(selectedIndex);
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Modification Alert");
-            confirmAlert.setContentText("Are you sure you want to make the changes?");
+            confirmAlert.setTitle("Deletion Alert");
+            confirmAlert.setContentText("Are you sure you want to delete it?");
             Optional<ButtonType> result = confirmAlert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 Inventory.deletePart(partForDeletion);

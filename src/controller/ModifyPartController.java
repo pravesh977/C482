@@ -14,7 +14,7 @@ import model.Outsourced;
 import model.Part;
 
 import java.io.IOException;
-
+import java.util.Optional;
 
 
 public class ModifyPartController {
@@ -104,7 +104,8 @@ public class ModifyPartController {
                     int machineId = Integer.parseInt(modifyMachineOrCompanyTextField.getText());
                     Part modifiedPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
                     //int searchedIndex = Inventory.lookupPart(id).getId();
-                    Inventory.updatePart(id, modifiedPart);
+                    //Inventory.updatePart(id, modifiedPart); using modifyconfirmationpart instead
+                    modifyPartConfirmation(id, modifiedPart);
                     System.out.println(id + " is the id");
                     //System.out.println(searchedIndex + " is the searched index");
                 } else if (outsourcedRadio.isSelected()) {
@@ -112,7 +113,8 @@ public class ModifyPartController {
                     String companyName = modifyMachineOrCompanyTextField.getText();
                     Part modifiedPart = new Outsourced(id, name, price, totalInventory, min, max, companyName);
                     //int searchedIndex = Inventory.lookupPart(id).getId();
-                    Inventory.updatePart(id, modifiedPart);
+                    //Inventory.updatePart(id, modifiedPart);
+                    modifyPartConfirmation(id, modifiedPart);
                     System.out.println(id + " is the id");
                     //System.out.println(searchedIndex + " is the searched index");
                 }
@@ -143,4 +145,14 @@ public class ModifyPartController {
         machineCompanyLabel.setText("Company Name");
     }
 
+    @FXML
+    public void modifyPartConfirmation(int id, Part modifiedPart) {
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Modify Alert");
+            confirmAlert.setContentText("Are you sure you want to modify it?");
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.updatePart(id, modifiedPart);
+            }
+    }
 }
