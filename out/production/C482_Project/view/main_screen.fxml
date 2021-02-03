@@ -31,7 +31,7 @@
             </TableView>
             <Button layoutX="15.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#addNewPart" text="Add" />
             <Button layoutX="333.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#modifyPart" text="Modify" />
-            <Button layoutX="419.0" layoutY="232.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="419.0" layoutY="232.0" mnemonicParsing="false" text="Delete" onMouseClicked="#deleteParts"/>
          </children></AnchorPane>
       <AnchorPane layoutX="512.0" layoutY="80.0" prefHeight="267.0" prefWidth="489.0" style="-fx-border-style: solid; -fx-border-color: grey; -fx-border-radius: 20px;">
          <children>

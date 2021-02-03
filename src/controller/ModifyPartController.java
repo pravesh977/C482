@@ -67,7 +67,7 @@ public class ModifyPartController {
             //this sets the radio button to inhouse
             inHouseRadio.fire();
             //machineCompanyLabel.setText("Machine Id"); replaced with existing method
-            changeLabelToInhouse();
+            changeLabelToInHouse();
             InHouse inHousePart = (InHouse)(modifyPart);
             modifyMachineOrCompanyTextField.setText(String.valueOf(inHousePart.getMachineId()));
 
@@ -82,6 +82,51 @@ public class ModifyPartController {
         }
     }
 
+    /**Caused by: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+     */
+    @FXML
+    public void modifyPartsSave(MouseEvent event) throws IOException {
+        try {
+            int id = Integer.parseInt(modifyIdTextField.getText());
+            String name = modifyNameTextField.getText();
+            double price = Double.parseDouble(modifyPriceTextField.getText());
+            int totalInventory = Integer.parseInt(modifyInvTextField.getText());
+            int min = Integer.parseInt(modifyMinTextField.getText());
+            int max = Integer.parseInt(modifyMaxTextField.getText());
+            if (min >= max) {
+                AlertMessageController.minMaxError();
+            } else if ((totalInventory < min) || (totalInventory > max)) {
+                AlertMessageController.inventoryInBetween();
+            } else {
+                //insert condition for radio buttons
+                if (inHouseRadio.isSelected()) {
+                    machineCompanyLabel.setText("Machine Id");
+                    int machineId = Integer.parseInt(modifyMachineOrCompanyTextField.getText());
+                    Part modifiedPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
+                    int searchedIndex = Inventory.lookupPart(id).getId();
+                    Inventory.updatePart(searchedIndex, modifiedPart);
+                    System.out.println(id + " is the id");
+                    System.out.println(searchedIndex + " is the searched index");
+                } else if (outsourcedRadio.isSelected()) {
+                    machineCompanyLabel.setText("Company Name");
+                    String companyName = modifyMachineOrCompanyTextField.getText();
+                    Part modifiedPart = new Outsourced(id, name, price, totalInventory, min, max, companyName);
+                    int searchedIndex = Inventory.lookupPart(id).getId();
+                    Inventory.updatePart(searchedIndex, modifiedPart);
+                    System.out.println(id + " is the id");
+                    System.out.println(searchedIndex + " is the searched index");
+                }
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            }
+
+        } catch(NumberFormatException exp) { // | IndexOutOfBoundsException exp) {
+            AlertMessageController.errorPart();
+        }
+    }
+
     @FXML
     public void cancelPressed(MouseEvent event) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -90,7 +135,7 @@ public class ModifyPartController {
         stage.show();
     }
 
-    public void changeLabelToInhouse() {
+    public void changeLabelToInHouse() {
         machineCompanyLabel.setText("Machine Id");
     }
 

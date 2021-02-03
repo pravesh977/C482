@@ -86,17 +86,24 @@ public class Inventory {
         return matchedProducts;
     }
 
-//    public static void updatePart (int index, Part selectedPart) {
-//
-//    }
+    public static void updatePart (int index, Part selectedPart) {
+        int idx = -1;
+        for(Part element : allParts)
+        {
+            idx++;
+            if(element.getId() == index) {
+                allParts.set(idx, selectedPart);
+            }
+        }
+    }
 //
 //    public static void updateProduct (int index, Product newProduct) {
 //
 //    }
-//
-//    public static boolean deletePart (Part selectedPart) {
-//        return ture or false;
-//    }
+
+    public static boolean deletePart (Part selectedPart) {
+        return allParts.remove(selectedPart);
+    }
 //
 //    public static boolean deleteProduct (Product selectedProduct) {
 //        return true or false;

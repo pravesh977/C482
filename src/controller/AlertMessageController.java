@@ -1,6 +1,9 @@
 package controller;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public class AlertMessageController {
 
@@ -36,4 +39,14 @@ public class AlertMessageController {
         errorAlert.showAndWait();
     }
 
+//    public static void confirmModify() {
+//        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+//        confirmAlert.setTitle("Modification Alert");
+//        confirmAlert.setContentText("Are you sure you want to make the changes?");
+//        Optional<ButtonType> result = confirmAlert.showAndWait();
+//        if(result.isPresent() && result.get() == ButtonType.OK) {
+//
+//        }
+//        confirmAlert.showAndWait();
+//    }
 }

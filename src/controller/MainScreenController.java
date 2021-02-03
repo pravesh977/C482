@@ -16,6 +16,7 @@ import model.*;
 import javax.security.sasl.SaslException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class MainScreenController {
 
@@ -134,6 +135,25 @@ public class MainScreenController {
                     AlertMessageController.errorNonSelection();
         }
 
+    }
+
+    @FXML
+    public void deleteParts() throws IOException {
+        if(partsTableView.getSelectionModel().getSelectedItem() != null) {
+            Part partForDeletion = partsTableView.getSelectionModel().getSelectedItem();
+//        int selectedIndex = partsTableView.getSelectionModel().getSelectedItem().getId();
+//        Inventory.lookupPart(selectedIndex);
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Modification Alert");
+            confirmAlert.setContentText("Are you sure you want to make the changes?");
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.deletePart(partForDeletion);
+            }
+        }
+        else {
+            AlertMessageController.errorNonSelection();
+        }
     }
 
     @FXML
