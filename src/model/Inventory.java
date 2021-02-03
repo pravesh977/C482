@@ -86,13 +86,13 @@ public class Inventory {
         return matchedProducts;
     }
 
-    public static void updatePart (int index, Part selectedPart) {
-        int idx = -1;
+    public static void updatePart (int id, Part selectedPart) {
+        int index = -1;
         for(Part element : allParts)
         {
-            idx++;
-            if(element.getId() == index) {
-                allParts.set(idx, selectedPart);
+            index++;
+            if(element.getId() == id) {
+                allParts.set(index, selectedPart);
             }
         }
     }

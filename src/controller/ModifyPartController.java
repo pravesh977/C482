@@ -103,18 +103,18 @@ public class ModifyPartController {
                     machineCompanyLabel.setText("Machine Id");
                     int machineId = Integer.parseInt(modifyMachineOrCompanyTextField.getText());
                     Part modifiedPart = new InHouse(id, name, price, totalInventory, min, max, machineId);
-                    int searchedIndex = Inventory.lookupPart(id).getId();
-                    Inventory.updatePart(searchedIndex, modifiedPart);
+                    //int searchedIndex = Inventory.lookupPart(id).getId();
+                    Inventory.updatePart(id, modifiedPart);
                     System.out.println(id + " is the id");
-                    System.out.println(searchedIndex + " is the searched index");
+                    //System.out.println(searchedIndex + " is the searched index");
                 } else if (outsourcedRadio.isSelected()) {
                     machineCompanyLabel.setText("Company Name");
                     String companyName = modifyMachineOrCompanyTextField.getText();
                     Part modifiedPart = new Outsourced(id, name, price, totalInventory, min, max, companyName);
-                    int searchedIndex = Inventory.lookupPart(id).getId();
-                    Inventory.updatePart(searchedIndex, modifiedPart);
+                    //int searchedIndex = Inventory.lookupPart(id).getId();
+                    Inventory.updatePart(id, modifiedPart);
                     System.out.println(id + " is the id");
-                    System.out.println(searchedIndex + " is the searched index");
+                    //System.out.println(searchedIndex + " is the searched index");
                 }
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("../view/main_screen.fxml"));
