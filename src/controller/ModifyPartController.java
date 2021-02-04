@@ -16,43 +16,83 @@ import model.Part;
 import java.io.IOException;
 import java.util.Optional;
 
-
+/**
+ * FUTURE ENHANCEMENT: Application will show warning if all new modified part values match an existing part. This will make each part unique other than the id.
+ */
 public class ModifyPartController {
     Stage stage;
     Parent scene;
 
+    /**
+     * imports nameLabel label from modify_part.fxml file
+     */
     @FXML
     private Label nameLabel;
+
+    /**
+     * imports machineCompanyLabel label from modify_part.fxml file
+     */
     @FXML
     private Label machineCompanyLabel;
 
+    /**
+     * imports inHouseRadio button from modify_part.fxml file
+     */
     @FXML
     private RadioButton inHouseRadio;
 
+    /**
+     * imports outsourcedRaio button from modify_part.fxml file
+     */
     @FXML
     private RadioButton outsourcedRadio;
 
+    /**
+     * imports modifyIdTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyIdTextField;
 
+    /**
+     * imports modifyNameTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyNameTextField;
 
+    /**
+     * imports modifyInvTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyInvTextField;
 
+    /**
+     * imports modifyPriceTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyPriceTextField;
 
+    /**
+     * imports modifyMaxTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyMaxTextField;
 
+    /**
+     * imports modifyMinTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyMinTextField;
 
+    /**
+     * imports modifyMachineOrCompanyTextField TextField from modify_part.fxml file
+     */
     @FXML
     private TextField modifyMachineOrCompanyTextField;
 
+    /**
+     * LOGICAL ERROR: Could not set the values of the inHouse or outsourced from the selected part. Fixed by checking if the part sent is
+     * inHouse or outsourced by using instanceof operator and then casting it to appropriate type(inHouse or Outsourced)
+     */
     @FXML
     public void passPartsToModify(Part modifyPart) {
         modifyIdTextField.setText(String.valueOf(modifyPart.getId()));
@@ -70,7 +110,6 @@ public class ModifyPartController {
             changeLabelToInHouse();
             InHouse inHousePart = (InHouse) (modifyPart);
             modifyMachineOrCompanyTextField.setText(String.valueOf(inHousePart.getMachineId()));
-
         } else if (modifyPart instanceof Outsourced) {
             System.out.println("its outsourced");
             //this sets the radio button to outsourced
@@ -83,7 +122,8 @@ public class ModifyPartController {
     }
 
     /**
-     * Caused by: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+     * RUNTIME ERROR: java.lang.IndexOutOfBoundsException: Caused when selected part is attempted to modify. Fixed by adding an index of -1 to the updatePart
+     * method in Inventory class and updating it by 1 in the loop to find the correct index to be updated.
      */
     @FXML
     public void modifyPartsSave(MouseEvent event) throws IOException {
@@ -96,8 +136,11 @@ public class ModifyPartController {
             int max = Integer.parseInt(modifyMaxTextField.getText());
             if (min >= max) {
                 AlertMessageController.minMaxError();
-            } else if ((totalInventory < min) || (totalInventory > max)) {
+            } else if ((totalInventory <= min) || (totalInventory >= max)) {
                 AlertMessageController.inventoryInBetween();
+            }
+            else if (name.trim().isEmpty()) {
+                AlertMessageController.nullName();
             } else {
                 //insert condition for radio buttons
                 if (inHouseRadio.isSelected()) {
@@ -130,6 +173,9 @@ public class ModifyPartController {
         }
     }
 
+    /**
+     * This returns the users to the main screen when cancel button is pressed.
+     */
     @FXML
     public void cancelPressed(MouseEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -138,14 +184,23 @@ public class ModifyPartController {
         stage.show();
     }
 
+    /**
+     * This changes the label to inHouse when pressed
+     */
     public void changeLabelToInHouse() {
         machineCompanyLabel.setText("Machine Id");
     }
 
+    /**
+     * This changes the label to outsourced when pressed
+     */
     public void changeLabelToOutsourced() {
         machineCompanyLabel.setText("Company Name");
     }
 
+    /**
+     * This accepts the index and Part modifiedPart from the modifyPartsSave method and sends it to updatePArt method if the user accepts to make changes
+     */
     @FXML
     public void modifyPartConfirmation(int id, Part modifiedPart) {
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);

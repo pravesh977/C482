@@ -7,40 +7,61 @@ import javafx.collections.ObservableListBase;
 
 import java.util.ArrayList;
 
+/**
+ * The Inventory Class which holds a list of parts and products
+ */
 public class Inventory {
     private static int uniqueIdPart = 7;
     private static int uniqueIdProduct = 4;
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    //remove this constructor?
-//    public Inventory() {
-//        allParts = new ObservableList<Part>();
-//    }
+    /**
+     * Returns a unique id for a new part
+     */
     public static int getUniqueIdPart() {
         return uniqueIdPart;
     }
 
+    /**
+     * Increases the value of uniqueIdPart by 1
+     */
     public static void incrementUniqueIdPart() {
         ++uniqueIdPart;
     }
+
+    /**
+     * Returns unique id for a product
+     */
     public static int getUniqueIdProduct() {
         return uniqueIdProduct;
     }
 
+    /**
+     * Increases the value of uniqueIdProduct by 1
+     */
     public static void incrementUniqueIdProduct() {
         ++uniqueIdProduct;
     }
 
-    public static void addPart (Part newPart) {
-        allParts.add(newPart); //FIX ME probable need to handle input exceptions
+    /**
+     * Adds the newly created part to the allParts observable list
+     */
+    public static void addPart(Part newPart) {
+        allParts.add(newPart);
     }
 
-    public static void addProduct (Product newProduct) {
+    /**
+     * Adds the newly created product to the allProducts observable list
+     */
+    public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 
-    public static Part lookupPart (int partId) {
+    /**
+     * Receives the partId from the form and then starts a loop to see if the partId matches any of the list's id and returns the part
+     */
+    public static Part lookupPart(int partId) {
         //using for loop
 //        for(int i = 0; i < allParts.size(); i++) {
 //            if(allParts.get(i).getId() == partId) {
@@ -52,27 +73,32 @@ public class Inventory {
 //        return null;
 
         //using Enhanced loop
-        for(Part element : allParts)
-        {
-            if(element.getId() == partId) {
+        for (Part element : allParts) {
+            if (element.getId() == partId) {
                 return element;
             }
         }
         return null;
     }
 
-    public static Product lookupProduct (int productId) {
-        for(Product element : allProducts) {
-            if(element.getId() == productId) {
+    /**
+     * Receives the productId from the form and then starts a loop to see if the productId matches any of the list's id and returns the product
+     */
+    public static Product lookupProduct(int productId) {
+        for (Product element : allProducts) {
+            if (element.getId() == productId) {
                 return element;
             }
         }
         return null;
     }
 
-    public static ObservableList<Part> lookupPart (String partName) {
+    /**
+     * Receives the partName from the form and then starts a loop to see if the productId matches any of the list's names and returns the matched part array
+     */
+    public static ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> matchedParts = FXCollections.observableArrayList();
-        for(Part element : allParts) {
+        for (Part element : allParts) {
             if (element.getName().toLowerCase().contains(partName.toLowerCase())) {
                 matchedParts.add(element);
             }
@@ -80,49 +106,70 @@ public class Inventory {
         return matchedParts;
     }
 
-    public static ObservableList<Product> lookupProduct (String productName) {
+    /**
+     * Receives the productName from the form and then starts a loop to see if the productName matches any of the list's names and returns the matched product array
+     */
+    public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> matchedProducts = FXCollections.observableArrayList();
-        for(Product element : allProducts) {
-            if (element.getName().toLowerCase().contains(productName)){
+        for (Product element : allProducts) {
+            if (element.getName().toLowerCase().contains(productName)) {
                 matchedProducts.add(element);
             }
         }
         return matchedProducts;
     }
 
-    public static void updatePart (int id, Part selectedPart) {
-        int index = -1;
-        for(Part element : allParts) {
-            index++;
-            if(element.getId() == id) {
-                allParts.set(index, selectedPart);
+    /**
+     * Receives the index and selectedPart object from the form and then starts a loop to see if the index matches any of the list's id and updates the part
+     */
+    public static void updatePart(int index, Part selectedPart) {
+        int position = -1;
+        for (Part element : allParts) {
+            position++;
+            if (element.getId() == index) {
+                allParts.set(position, selectedPart);
             }
         }
     }
 
-    public static void updateProduct (int index, Product newProduct) {
+    /**
+     * Receives the index and newProduct object from the form and then starts a loop to see if the index matches any of the list's id and updates the product
+     */
+    public static void updateProduct(int index, Product newProduct) {
         int position = -1;
-        for(Product element : allProducts) {
+        for (Product element : allProducts) {
             position++;
-            if(element.getId() == index) {
+            if (element.getId() == index) {
                 allProducts.set(position, newProduct);
             }
         }
     }
 
-    public static boolean deletePart (Part selectedPart) {
+    /**
+     * Receives the selectedPart object from the form and finds and deletes the part
+     */
+    public static boolean deletePart(Part selectedPart) {
         return allParts.remove(selectedPart);
     }
 
-    public static boolean deleteProduct (Product selectedProduct) {
+    /**
+     * Receives the selectedProduct object from the form and finds and deletes the product
+     */
+    public static boolean deleteProduct(Product selectedProduct) {
         return allProducts.remove(selectedProduct);
     }
 
-    public static ObservableList<Part> getAllParts () {
+    /**
+     * Returns all the parts from the allParts observable list
+     */
+    public static ObservableList<Part> getAllParts() {
         return allParts;
     }
-//
-    public static ObservableList<Product> getAllProducts () {
+
+    /**
+     * Returns all the products from the allProducts observable list
+     */
+    public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 }

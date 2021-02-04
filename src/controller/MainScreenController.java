@@ -18,50 +18,88 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * FUTURE ENHANCEMENT: Adding dynamic search capability for the parts and products. The parts and products tables would update based on each key pressed instead of having to click on search button or pressing the enter key.
+ */
 public class MainScreenController {
 
     Stage stage;
     Parent scene;
 
+    /**
+     * Imports partsTableView from the main_screen.fxml file
+     */
     @FXML
     private TableView<Part> partsTableView;
 
+    /**
+     * Imports partIdCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Part, Integer> partIdCol;
 
+    /**
+     * Imports partNameCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Part, String> partNameCol;
 
+    /**
+     * Imports partInvCountCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Part, Integer> partInvCountCol;
 
+    /**
+     * Imports partPriceCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Part, Double> partPriceCol;
 
+    /**
+     * Imports productsTableView table from the main_screen.fxml file
+     */
     @FXML
     private TableView<Product> productsTableView;
 
+    /**
+     * Imports productIdCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Product, Integer> productIdCol;
 
+    /**
+     * Imports productNameCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Product, String> productNameCol;
 
+    /**
+     * Imports productInvCount column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Product, Integer> productInvCount;
 
+    /**
+     * Imports productPriceCol column from the main_screen.fxml file
+     */
     @FXML
     private TableColumn<Product, Double> productPriceCol;
 
+    /**
+     * Imports searchPartsField text field from the main_screen.fxml file
+     */
     @FXML
     private TextField searchPartsField;
 
+    /**
+     * Imports searchProductsField text field from the main_screen.fxml file
+     */
     @FXML
     private TextField searchProductsField;
 
     /**
-     * Exception in Application start method
-     * Corrected by matching the main_scree.fxml file's TableView id with field declaration in MainScreenController class
+     * Exception in Application start method. Corrected by matching the main_scree.fxml file's TableView id with field importing in MainScreenController class.
      */
     public void initialize() {
 
@@ -80,6 +118,9 @@ public class MainScreenController {
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This method opens a new window where users can add new parts.
+     */
     @FXML
     public void addNewPart(MouseEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -89,10 +130,7 @@ public class MainScreenController {
     }
 
     /**
-     * RUNTIME ERROR NullPointerException: caused by clicking on modify button without selecting item. try block.
-     *
-     * @param event
-     * @throws IOException
+     * RUNTIME ERROR: NullPointerException: Caused by clicking on modify button without selecting an item. Corrected by catching the exception and showing an error dialog to select an item.
      */
     @FXML
     public void modifyPart(MouseEvent event) throws IOException {
@@ -136,6 +174,9 @@ public class MainScreenController {
         }
     }
 
+    /**
+     * This method grabs the selected part, saves it in a Part variable and sends it to deletePart method in Inventory class where it deletes the part.
+     */
     @FXML
     public void deleteParts() {
         if (partsTableView.getSelectionModel().getSelectedItem() != null) {
@@ -154,22 +195,34 @@ public class MainScreenController {
         }
     }
 
+    /**
+     * This method grabs the selected product, saves it in a product variable and sends it to deleteProduct method in Inventory class where it deletes the product.
+     */
     @FXML
     public void deleteProduct() {
-        if(productsTableView.getSelectionModel().getSelectedItem() != null) {
+        if (productsTableView.getSelectionModel().getSelectedItem() != null) {
             Product productForDeletion = productsTableView.getSelectionModel().getSelectedItem();
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmAlert.setTitle("Deletion Alert");
             confirmAlert.setContentText("Are you sure you want to delete it?");
             Optional<ButtonType> result = confirmAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                Inventory.deleteProduct(productForDeletion);
+                //display dialog box saying product cant be deleted if it has associated parts
+                if (productForDeletion.getAllAssociatedParts().size() != 0) {
+                    AlertMessageController.productAssociatedPartNotEmptyError();
+                } else {
+                    //this deletes the selected product if ok is selected
+                    Inventory.deleteProduct(productForDeletion);
+                }
             }
         } else {
             AlertMessageController.errorNonSelection();
         }
     }
 
+    /**
+     * This opens a window in which users can add new product.
+     */
     @FXML
     public void addNewProduct(MouseEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -178,30 +231,34 @@ public class MainScreenController {
         stage.show();
     }
 
-
+    /**
+     * RUNTIME ERROR: NullPointerException: Caused by clicking on modify button without selecting an item. Corrected by catching the exception and showing an error dialog to select an item.
+     */
     @FXML
     public void modifyProduct(MouseEvent event) throws IOException {
 
 //        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(0).getName());
 //        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(1).getName());
-    try {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../view/modify_product.fxml"));
-        loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../view/modify_product.fxml"));
+            loader.load();
 
-        ModifyProductController modProdCont = loader.getController();
-        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
-        modProdCont.passProductToModify(selectedProduct);
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        Parent scene = loader.getRoot();
-        stage.setScene(new Scene(scene));
-        stage.show();
-    } catch(NullPointerException exp) {
-        AlertMessageController.errorNonSelection();
-    }
+            ModifyProductController modProdCont = loader.getController();
+            Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+            modProdCont.passProductToModify(selectedProduct);
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        } catch (NullPointerException exp) {
+            AlertMessageController.errorNonSelection();
+        }
     }
 
-    //NumberFormatException.For input string: fixed by using catch to see if its string
+    /**
+     * NumberFormatException.For input string: Caused when entered value is string in the search bar. Fixed by using catch to see if its string and then treating the entered value as a string for search.
+     */
     @FXML
     public void searchPartsAction() {
         //Part select searched working
@@ -210,48 +267,50 @@ public class MainScreenController {
             Part searchedPart = Inventory.lookupPart(searchedPartInteger);
             if (searchedPart == null) {
                 AlertMessageController.searchNotFound();
-            }
-            else {
+            } else {
                 partsTableView.getSelectionModel().select(searchedPart);
                 partsTableView.scrollTo(searchedPart);
             }
         } catch (NumberFormatException e) {
             String searchedPartsString = searchPartsField.getText();
             ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
-            if(matchedPartsList.size() == 0) {
+            if (matchedPartsList.size() == 0) {
                 AlertMessageController.searchNotFound();
-            }
-            else {
+            } else {
                 partsTableView.setItems(matchedPartsList);
             }
         }
         searchPartsField.clear();
     }
 
+    /**
+     * NumberFormatException.For input string: Caused when entered value is string in the search bar. Fixed by using catch to see if its string and then treating the entered value as a string for search.
+     */
     public void searchProductsAction() {
         try {
             int searchedProductInteger = Integer.parseInt(searchProductsField.getText());
             Product searchedProduct = Inventory.lookupProduct(searchedProductInteger);
-            if(searchedProduct == null) {
+            if (searchedProduct == null) {
                 AlertMessageController.searchNotFound();
-            }
-            else {
+            } else {
                 productsTableView.getSelectionModel().select(searchedProduct);
                 productsTableView.scrollTo(searchedProduct);
             }
         } catch (NumberFormatException e) {
             String searchedProductString = searchProductsField.getText();
             ObservableList<Product> matchedProductsList = Inventory.lookupProduct(searchedProductString);
-            if(matchedProductsList.size() == 0) {
+            if (matchedProductsList.size() == 0) {
                 AlertMessageController.searchNotFound();
-            }
-            else {
+            } else {
                 productsTableView.setItems(matchedProductsList);
             }
         }
         searchProductsField.clear();
     }
 
+    /**
+     * This exits the program when users click on exit.
+     */
     @FXML
     public void exitButton() {
         System.exit(0);
