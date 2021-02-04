@@ -136,7 +136,7 @@ public class ModifyPartController {
             int max = Integer.parseInt(modifyMaxTextField.getText());
             if (min >= max) {
                 AlertMessageController.minMaxError();
-            } else if ((totalInventory <= min) || (totalInventory >= max)) {
+            } else if ((totalInventory < min) || (totalInventory > max)) {
                 AlertMessageController.inventoryInBetween();
             }
             else if (name.trim().isEmpty()) {

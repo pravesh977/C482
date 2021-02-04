@@ -250,7 +250,7 @@ public class ModifyProductController {
             int max = Integer.parseInt(maxProductTextField.getText());
             if (min >= max) {
                 AlertMessageController.minMaxError();
-            } else if ((totalInventory <= min) || (totalInventory >= max)) {
+            } else if ((totalInventory < min) || (totalInventory > max)) {
                 AlertMessageController.inventoryInBetween();
             }
             else if (name.trim().isEmpty()) {
