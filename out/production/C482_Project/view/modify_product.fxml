@@ -11,7 +11,7 @@
                 <Font name="Times New Roman Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="searchPartsTextField" layoutX="480.0" layoutY="20.0" promptText="Search by Part ID or Name" />
+        <TextField fx:id="searchPartsTextField" layoutX="480.0" layoutY="20.0" promptText="Search by Part ID or Name"  onAction="#searchPartsClicked"/>
         <AnchorPane layoutX="14.0" layoutY="72.0" prefHeight="214.0" prefWidth="258.0">
             <children>
                 <Label layoutX="14.0" layoutY="24.0" text="ID">
@@ -49,7 +49,7 @@
                         <Font name="Times New Roman" size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="minProductTextField" layoutX="192.0" layoutY="173.0" onAction="#searchPartsClicked" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="minProductTextField" layoutX="192.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="377.0" layoutY="41.0" prefHeight="259.0" prefWidth="474.0">
