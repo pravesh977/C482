@@ -88,7 +88,7 @@
             </Label>
             </children>
         </AnchorPane>
-        <TextField fx:id="searchPartsTextField" layoutX="539.0" layoutY="31.0" prefHeight="27.0" prefWidth="161.0" promptText="Search by Part ID or Name" />
+        <TextField fx:id="searchPartsTextField" layoutX="539.0" layoutY="31.0" prefHeight="27.0" prefWidth="161.0" promptText="Search by Part ID or Name" onAction="#handleSearchPartsClicked"/>
     </AnchorPane>
     <Button fx:id="saveProductButton" layoutX="709.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#saveNewProduct" text="Save" />
     <Button layoutX="786.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#cancelPressed" text="Cancel" />

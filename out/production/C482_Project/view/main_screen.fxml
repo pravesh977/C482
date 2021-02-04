@@ -19,7 +19,7 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="searchPartsField" layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
+            <TextField fx:id="searchPartsField" layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" onAction="#searchPartsAction"/>
             <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#searchPartsAction" text="Search" />
             <TableView fx:id="partsTableView" layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
               <columns>
@@ -40,7 +40,7 @@
                   <Font name="Times New Roman Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="searchProductsField" layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" />
+            <TextField fx:id="searchProductsField" layoutX="257.0" layoutY="20.0" prefHeight="27.0" prefWidth="152.0" promptText="Search By ID or Name" onAction="#searchProductsAction"/>
             <Button layoutX="418.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#searchProductsAction" text="Search" />
             <TableView fx:id="productsTableView" layoutX="15.0" layoutY="56.0" prefHeight="170.0" prefWidth="459.0">
                <columns>

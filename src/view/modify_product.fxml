@@ -11,7 +11,7 @@
                 <Font name="Times New Roman Bold" size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="searchPartsTextField" layoutX="502.0" layoutY="28.0" promptText="Search by Part ID or Name"/>
+        <TextField fx:id="searchPartsTextField" layoutX="480.0" layoutY="20.0" promptText="Search by Part ID or Name" />
         <AnchorPane layoutX="14.0" layoutY="72.0" prefHeight="214.0" prefWidth="258.0">
             <children>
                 <Label layoutX="14.0" layoutY="24.0" text="ID">
@@ -39,7 +39,7 @@
                         <Font name="Times New Roman" size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="idProductTextField" layoutX="67.0" layoutY="18.0" disable="true"/>
+                <TextField fx:id="idProductTextField" disable="true" layoutX="67.0" layoutY="18.0" />
                 <TextField fx:id="nameProductTextField" layoutX="67.0" layoutY="55.0" />
                 <TextField fx:id="inventoryProductTextField" layoutX="67.0" layoutY="94.0" prefHeight="27.0" prefWidth="72.0" />
                 <TextField fx:id="priceProductTextField" layoutX="67.0" layoutY="132.0" prefHeight="27.0" prefWidth="72.0" />
@@ -49,7 +49,7 @@
                         <Font name="Times New Roman" size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="minProductTextField" layoutX="192.0" layoutY="173.0" prefHeight="27.0" prefWidth="72.0" />
+                <TextField fx:id="minProductTextField" layoutX="192.0" layoutY="173.0" onAction="#searchPartsClicked" prefHeight="27.0" prefWidth="72.0" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="377.0" layoutY="41.0" prefHeight="259.0" prefWidth="474.0">
@@ -68,7 +68,6 @@
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Label>
-            <Button layoutX="302.0" layoutY="-13.0" mnemonicParsing="false" onMouseClicked="#searchPartsClicked" text="Search" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="390.0" layoutY="303.0" prefHeight="234.0" prefWidth="474.0">
@@ -89,6 +88,7 @@
             </Label>
             </children>
         </AnchorPane>
+      <Button layoutX="653.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#searchPartsClicked" text="Search" />
     </AnchorPane>
     <Button layoutX="709.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#modifyProductSave" text="Save" />
     <Button layoutX="786.0" layoutY="577.0" mnemonicParsing="false" onMouseClicked="#cancelPressed" text="Cancel" />
