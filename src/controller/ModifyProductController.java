@@ -98,15 +98,23 @@ public class ModifyProductController {
         try {
             int searchedPartInteger = Integer.parseInt(searchPartsTextField.getText());
             Part searchedPart = Inventory.lookupPart(searchedPartInteger);
-            allPartsTableView.getSelectionModel().select(searchedPart);
-            allPartsTableView.scrollTo(searchedPart);
-            searchPartsTextField.clear();
+            if(searchedPart == null) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                allPartsTableView.getSelectionModel().select(searchedPart);
+                allPartsTableView.scrollTo(searchedPart);
+            }
         } catch (NumberFormatException exp) {
             String searchedPartsString = searchPartsTextField.getText();
             ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
-            allPartsTableView.setItems(matchedPartsList);
-            searchPartsTextField.clear();
+            if(matchedPartsList.size() == 0) {
+                AlertMessageController.searchNotFound();
+            } else {
+                allPartsTableView.setItems(matchedPartsList);
+            }
         }
+        searchPartsTextField.clear();
     }
 
 

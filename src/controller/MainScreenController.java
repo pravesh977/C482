@@ -208,30 +208,48 @@ public class MainScreenController {
         try {
             int searchedPartInteger = Integer.parseInt(searchPartsField.getText());
             Part searchedPart = Inventory.lookupPart(searchedPartInteger);
-            partsTableView.getSelectionModel().select(searchedPart);
-            partsTableView.scrollTo(searchedPart);
-            searchPartsField.clear();
+            if (searchedPart == null) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                partsTableView.getSelectionModel().select(searchedPart);
+                partsTableView.scrollTo(searchedPart);
+            }
         } catch (NumberFormatException e) {
             String searchedPartsString = searchPartsField.getText();
             ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
-            partsTableView.setItems(matchedPartsList);
-            searchPartsField.clear();
+            if(matchedPartsList.size() == 0) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                partsTableView.setItems(matchedPartsList);
+            }
         }
+        searchPartsField.clear();
     }
 
     public void searchProductsAction() {
         try {
             int searchedProductInteger = Integer.parseInt(searchProductsField.getText());
             Product searchedProduct = Inventory.lookupProduct(searchedProductInteger);
-            productsTableView.getSelectionModel().select(searchedProduct);
-            productsTableView.scrollTo(searchedProduct);
-            searchProductsField.clear();
+            if(searchedProduct == null) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                productsTableView.getSelectionModel().select(searchedProduct);
+                productsTableView.scrollTo(searchedProduct);
+            }
         } catch (NumberFormatException e) {
             String searchedProductString = searchProductsField.getText();
             ObservableList<Product> matchedProductsList = Inventory.lookupProduct(searchedProductString);
-            productsTableView.setItems(matchedProductsList);
-            searchProductsField.clear();
+            if(matchedProductsList.size() == 0) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                productsTableView.setItems(matchedProductsList);
+            }
         }
+        searchProductsField.clear();
     }
 
     @FXML

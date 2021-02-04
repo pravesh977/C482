@@ -105,15 +105,24 @@ public class AddProductController {
         try {
             int searchedPartInteger = Integer.parseInt(searchPartsTextField.getText());
             Part searchedPart = Inventory.lookupPart(searchedPartInteger);
-            addPartsTableView.getSelectionModel().select(searchedPart);
-            addPartsTableView.scrollTo(searchedPart);
-            searchPartsTextField.clear();
+            if(searchedPart == null) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                addPartsTableView.getSelectionModel().select(searchedPart);
+                addPartsTableView.scrollTo(searchedPart);
+            }
         } catch (NumberFormatException exp) {
             String searchedPartsString = searchPartsTextField.getText();
             ObservableList<Part> matchedPartsList = Inventory.lookupPart(searchedPartsString);
-            addPartsTableView.setItems(matchedPartsList);
-            searchPartsTextField.clear();
+            if(matchedPartsList.size() == 0) {
+                AlertMessageController.searchNotFound();
+            }
+            else {
+                addPartsTableView.setItems(matchedPartsList);
+            }
         }
+        searchPartsTextField.clear();
     }
 
     @FXML

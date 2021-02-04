@@ -42,6 +42,13 @@ public class AlertMessageController {
         errorAlert.showAndWait();
     }
 
+    public static void searchNotFound() {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Search Empty");
+        errorAlert.setContentText("No match found");
+        errorAlert.showAndWait();
+    }
+
 //    public static void confirmModify() {
 //        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
 //        confirmAlert.setTitle("Modification Alert");
