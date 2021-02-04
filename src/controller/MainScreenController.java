@@ -155,6 +155,22 @@ public class MainScreenController {
     }
 
     @FXML
+    public void deleteProduct() {
+        if(productsTableView.getSelectionModel().getSelectedItem() != null) {
+            Product productForDeletion = productsTableView.getSelectionModel().getSelectedItem();
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Deletion Alert");
+            confirmAlert.setContentText("Are you sure you want to delete it?");
+            Optional<ButtonType> result = confirmAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.deleteProduct(productForDeletion);
+            }
+        } else {
+            AlertMessageController.errorNonSelection();
+        }
+    }
+
+    @FXML
     public void addNewProduct(MouseEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("../view/add_product.fxml"));
@@ -168,14 +184,21 @@ public class MainScreenController {
 
 //        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(0).getName());
 //        System.out.println(Inventory.getAllProducts().get(3).getAllAssociatedParts().get(1).getName());
+    try {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/modify_product.fxml"));
+        loader.load();
 
-
-
-
+        ModifyProductController modProdCont = loader.getController();
+        Product selectedProduct = productsTableView.getSelectionModel().getSelectedItem();
+        modProdCont.passProductToModify(selectedProduct);
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("../view/modify_product.fxml"));
+        Parent scene = loader.getRoot();
         stage.setScene(new Scene(scene));
         stage.show();
+    } catch(NullPointerException exp) {
+        AlertMessageController.errorNonSelection();
+    }
     }
 
     //NumberFormatException.For input string: fixed by using catch to see if its string

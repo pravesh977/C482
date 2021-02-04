@@ -77,7 +77,8 @@ public class AddProductController {
     @FXML
     private Button saveProductButton;
 
-    ObservableList<Part> initialAssociatedParts = FXCollections.observableArrayList();
+    //this observable list holds array for associated parts
+    private ObservableList<Part> initialAssociatedParts = FXCollections.observableArrayList();
 
 
     public void initialize() {
