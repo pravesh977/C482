@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import model.*;
 
 /**
- * This is an entry point for the app
+ * Javadoc location is C482_Project/src/Javadoc. This is an entry point for the app
  */
 public class Main extends Application {
 
